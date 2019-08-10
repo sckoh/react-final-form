@@ -4,7 +4,7 @@
 coverage
 flow-coverage
 node_modules
-dist
+# dist
 lib
 es
 npm-debug.log

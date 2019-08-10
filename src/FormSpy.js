@@ -40,4 +40,4 @@ function FormSpy<FormValues: FormValuesShape>({
   )
 }
 
-export default FormSpy
+export default React.memo(FormSpy)

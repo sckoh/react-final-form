@@ -59,4 +59,4 @@ const Field = ({
   )
 }
 
-export default Field
+export default React.memo(Field)

@@ -203,4 +203,4 @@ function ReactFinalForm<FormValues: FormValuesShape>({
   )
 }
 
-export default ReactFinalForm
+export default React.memo(ReactFinalForm)
