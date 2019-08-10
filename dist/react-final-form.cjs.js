@@ -10,8 +10,8 @@ var _extends = _interopDefault(require('@babel/runtime/helpers/extends'))
 var _objectWithoutPropertiesLoose = _interopDefault(
   require('@babel/runtime/helpers/objectWithoutPropertiesLoose')
 )
-var React$1 = require('react')
-var React$1__default = _interopDefault(React$1)
+var React = require('react')
+var React__default = _interopDefault(React)
 var finalForm = require('final-form')
 
 // shared logic between components that use either render prop,
@@ -27,7 +27,7 @@ function renderComponent(props, name) {
     ])
 
   if (component) {
-    return React$1.createElement(
+    return React.createElement(
       component,
       _extends({}, rest, {
         children: children,
@@ -63,8 +63,8 @@ function useWhenValueChanges(value, callback, isEqual) {
     }
   }
 
-  var previous = React$1__default.useRef(value)
-  React$1__default.useEffect(function() {
+  var previous = React__default.useRef(value)
+  React__default.useEffect(function() {
     if (!isEqual(value, previous.current)) {
       callback()
       previous.current = value
@@ -86,7 +86,7 @@ function useWhenValueChanges(value, callback, isEqual) {
  */
 
 function useConstant(init) {
-  var ref = React$1__default.useRef()
+  var ref = React__default.useRef()
 
   if (!ref.current) {
     ref.current = init()
@@ -128,11 +128,11 @@ var isSyntheticEvent = function isSyntheticEvent(candidate) {
   return !!(candidate && typeof candidate.stopPropagation === 'function')
 }
 
-var ReactFinalFormContext = React$1.createContext()
+var ReactFinalFormContext = React.createContext()
 
 function useLatest(value) {
-  var ref = React$1__default.useRef(value)
-  React$1__default.useEffect(function() {
+  var ref = React__default.useRef(value)
+  React__default.useEffect(function() {
     ref.current = value
   })
   return ref
@@ -194,7 +194,7 @@ function ReactFinalForm(_ref) {
     return f
   }) // synchronously register and unregister to query form state for our subscription on first render
 
-  var _React$useState = React$1.useState(function() {
+  var _React$useState = React.useState(function() {
       var initialState = {}
       form.subscribe(function(state) {
         initialState = state
@@ -206,7 +206,7 @@ function ReactFinalForm(_ref) {
   // on the shallowEqual() line below.
 
   var stateRef = useLatest(state)
-  React$1.useEffect(
+  React.useEffect(
     function() {
       // We have rendered, so all fields are no registered, so we can unpause validation
       form.isValidationPaused() && form.resumeValidation()
@@ -312,7 +312,7 @@ function ReactFinalForm(_ref) {
     handleSubmit: handleSubmit
   })
 
-  return React$1.createElement(
+  return React.createElement(
     ReactFinalFormContext.Provider,
     {
       value: form
@@ -326,10 +326,10 @@ function ReactFinalForm(_ref) {
   )
 }
 
-var Form = React$1.memo(ReactFinalForm)
+var Form = React.memo(ReactFinalForm)
 
 function useForm(componentName) {
-  var form = React$1.useContext(ReactFinalFormContext)
+  var form = React.useContext(ReactFinalFormContext)
 
   if (!form) {
     throw new Error(
@@ -348,9 +348,9 @@ function useFormState(_temp) {
     subscription = _ref$subscription === void 0 ? all : _ref$subscription
 
   var form = useForm('useFormState')
-  var firstRender = React$1.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
+  var firstRender = React.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
 
-  var _React$useState = React$1.useState(function() {
+  var _React$useState = React.useState(function() {
       var initialState = {}
       form.subscribe(function(state) {
         initialState = state
@@ -365,7 +365,7 @@ function useFormState(_temp) {
     state = _React$useState[0],
     setState = _React$useState[1]
 
-  React$1.useEffect(
+  React.useEffect(
     function() {
       return form.subscribe(function(newState) {
         if (firstRender.current) {
@@ -565,9 +565,9 @@ function useField(name, _temp) {
     })
   }
 
-  var firstRender = React$1.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
+  var firstRender = React.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
 
-  var _React$useState = React$1.useState(function() {
+  var _React$useState = React.useState(function() {
       var initialState = {} // temporarily disable destroyOnUnregister
 
       var destroyOnUnregister = form.destroyOnUnregister
@@ -582,7 +582,7 @@ function useField(name, _temp) {
     state = _React$useState[0],
     setState = _React$useState[1]
 
-  React$1.useEffect(
+  React.useEffect(
     function() {
       return register(function(state) {
         if (firstRender.current) {
@@ -605,7 +605,7 @@ function useField(name, _temp) {
     ]
   )
   var handlers = {
-    onBlur: React$1.useCallback(
+    onBlur: React.useCallback(
       function(event) {
         state.blur()
 
@@ -627,7 +627,7 @@ function useField(name, _temp) {
       }, // eslint-disable-next-line react-hooks/exhaustive-deps
       [state.name, state.value, format, formatOnBlur]
     ),
-    onChange: React$1.useCallback(
+    onChange: React.useCallback(
       function(event) {
         // istanbul ignore next
         if (process.env.NODE_ENV !== 'production' && event && event.target) {
@@ -662,7 +662,7 @@ function useField(name, _temp) {
       }, // eslint-disable-next-line react-hooks/exhaustive-deps
       [_value, name, parse, state.change, state.value, type]
     ),
-    onFocus: React$1.useCallback(function(event) {
+    onFocus: React.useCallback(function(event) {
       state.focus() // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
   }
@@ -811,7 +811,7 @@ var Field = function Field(_ref) {
 
   if (typeof component === 'string') {
     // ignore meta, combine input with any other props
-    return React$1.createElement(
+    return React.createElement(
       component,
       _extends(
         {},
@@ -838,7 +838,7 @@ var Field = function Field(_ref) {
   )
 }
 
-var Field$1 = React$1.memo(Field)
+var Field$1 = React.memo(Field)
 
 function withTypes() {
   return {

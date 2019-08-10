@@ -417,7 +417,7 @@ function FormSpy(_ref) {
   return renderComponent(_extends({}, rest, state, renderProps), 'FormSpy')
 }
 
-var FormSpy$1 = React.memo(FormSpy)
+var FormSpy$1 = memo(FormSpy)
 
 var isReactNative =
   typeof window !== 'undefined' &&

@@ -9,10 +9,10 @@
         global.React,
         global.FinalForm
       ))
-})(this, function(exports, React$1, finalForm) {
+})(this, function(exports, React, finalForm) {
   'use strict'
 
-  var React$1__default = 'default' in React$1 ? React$1['default'] : React$1
+  var React__default = 'default' in React ? React['default'] : React
 
   function _extends() {
     _extends =
@@ -62,7 +62,7 @@
       ])
 
     if (component) {
-      return React$1.createElement(
+      return React.createElement(
         component,
         _extends({}, rest, {
           children: children,
@@ -98,8 +98,8 @@
       }
     }
 
-    var previous = React$1__default.useRef(value)
-    React$1__default.useEffect(function() {
+    var previous = React__default.useRef(value)
+    React__default.useEffect(function() {
       if (!isEqual(value, previous.current)) {
         callback()
         previous.current = value
@@ -121,7 +121,7 @@
    */
 
   function useConstant(init) {
-    var ref = React$1__default.useRef()
+    var ref = React__default.useRef()
 
     if (!ref.current) {
       ref.current = init()
@@ -163,11 +163,11 @@
     return !!(candidate && typeof candidate.stopPropagation === 'function')
   }
 
-  var ReactFinalFormContext = React$1.createContext()
+  var ReactFinalFormContext = React.createContext()
 
   function useLatest(value) {
-    var ref = React$1__default.useRef(value)
-    React$1__default.useEffect(function() {
+    var ref = React__default.useRef(value)
+    React__default.useEffect(function() {
       ref.current = value
     })
     return ref
@@ -229,7 +229,7 @@
       return f
     }) // synchronously register and unregister to query form state for our subscription on first render
 
-    var _React$useState = React$1.useState(function() {
+    var _React$useState = React.useState(function() {
         var initialState = {}
         form.subscribe(function(state) {
           initialState = state
@@ -241,7 +241,7 @@
     // on the shallowEqual() line below.
 
     var stateRef = useLatest(state)
-    React$1.useEffect(
+    React.useEffect(
       function() {
         // We have rendered, so all fields are no registered, so we can unpause validation
         form.isValidationPaused() && form.resumeValidation()
@@ -347,7 +347,7 @@
       handleSubmit: handleSubmit
     })
 
-    return React$1.createElement(
+    return React.createElement(
       ReactFinalFormContext.Provider,
       {
         value: form
@@ -361,10 +361,10 @@
     )
   }
 
-  var Form = React$1.memo(ReactFinalForm)
+  var Form = React.memo(ReactFinalForm)
 
   function useForm(componentName) {
-    var form = React$1.useContext(ReactFinalFormContext)
+    var form = React.useContext(ReactFinalFormContext)
 
     if (!form) {
       throw new Error(
@@ -383,9 +383,9 @@
       subscription = _ref$subscription === void 0 ? all : _ref$subscription
 
     var form = useForm('useFormState')
-    var firstRender = React$1.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
+    var firstRender = React.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
 
-    var _React$useState = React$1.useState(function() {
+    var _React$useState = React.useState(function() {
         var initialState = {}
         form.subscribe(function(state) {
           initialState = state
@@ -400,7 +400,7 @@
       state = _React$useState[0],
       setState = _React$useState[1]
 
-    React$1.useEffect(
+    React.useEffect(
       function() {
         return form.subscribe(function(newState) {
           if (firstRender.current) {
@@ -600,9 +600,9 @@
       })
     }
 
-    var firstRender = React$1.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
+    var firstRender = React.useRef(true) // synchronously register and unregister to query field state for our subscription on first render
 
-    var _React$useState = React$1.useState(function() {
+    var _React$useState = React.useState(function() {
         var initialState = {} // temporarily disable destroyOnUnregister
 
         var destroyOnUnregister = form.destroyOnUnregister
@@ -617,7 +617,7 @@
       state = _React$useState[0],
       setState = _React$useState[1]
 
-    React$1.useEffect(
+    React.useEffect(
       function() {
         return register(function(state) {
           if (firstRender.current) {
@@ -640,7 +640,7 @@
       ]
     )
     var handlers = {
-      onBlur: React$1.useCallback(
+      onBlur: React.useCallback(
         function(event) {
           state.blur()
 
@@ -662,7 +662,7 @@
         }, // eslint-disable-next-line react-hooks/exhaustive-deps
         [state.name, state.value, format, formatOnBlur]
       ),
-      onChange: React$1.useCallback(
+      onChange: React.useCallback(
         function(event) {
           // istanbul ignore next
           if (event && event.target) {
@@ -698,7 +698,7 @@
         }, // eslint-disable-next-line react-hooks/exhaustive-deps
         [_value, name, parse, state.change, state.value, type]
       ),
-      onFocus: React$1.useCallback(function(event) {
+      onFocus: React.useCallback(function(event) {
         state.focus() // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [])
     }
@@ -847,7 +847,7 @@
 
     if (typeof component === 'string') {
       // ignore meta, combine input with any other props
-      return React$1.createElement(
+      return React.createElement(
         component,
         _extends(
           {},
@@ -874,7 +874,7 @@
     )
   }
 
-  var Field$1 = React$1.memo(Field)
+  var Field$1 = React.memo(Field)
 
   function withTypes() {
     return {

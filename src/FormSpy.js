@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react'
 import renderComponent from './renderComponent'
 import type { FormSpyPropsWithForm as Props, FormSpyRenderProps } from './types'
 import type { FormValuesShape } from 'final-form'
